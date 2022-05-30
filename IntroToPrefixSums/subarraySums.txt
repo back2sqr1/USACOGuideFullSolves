@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+    cin.tie(0)->sync_with_stdio(0); // unsync C / C++ I/O streams
+//    freopen("hps.in","r",stdin);
+//    freopen("hps.out","w",stdout);
+    // O(N^2) go through all possible subarrays, O(1) sums
+    long long N, X;
+    cin >> N >> X;
+    vector<long long> a(N);
+    for(int i = 0; i < N; i++) {
+        cin >> a[i];
+    }
+    map<long long, long long> cnt;
+    long long sum = 0, ans = 0;
+    cnt[0] ++; // empty array
+    for(int i = 0; i < N; i ++) {
+        sum += a[i]; 
+        // sum == p[j]
+
+        if(cnt.count(sum - X)) // p[i - 1]
+            ans += cnt[sum - X];
+        cnt[sum]++;
+    }
+
+    cout << ans << endl;
+}

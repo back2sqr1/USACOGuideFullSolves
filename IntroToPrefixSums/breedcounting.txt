@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+    cin.tie(0)->sync_with_stdio(0); // unsync C / C++ I/O streams
+    freopen("bcount.in","r",stdin);
+    freopen("bcount.out","w",stdout);
+    int N, Q;
+    cin >> N >> Q;
+    int a[N + 1];
+    for(int i = 1; i <= N; ++i) {
+        cin >> a[i];
+        a[i] --;
+    }
+
+    int cnt[3][N + 1];
+    for(int i = 0; i < 3; i++) 
+        for(int j = 0; j < N + 1; j++) 
+            cnt[i][j] = 0;
+    for(int i = 1; i <= N; ++i) {
+        cnt[a[i]][i]++;
+        cnt[0][i] += cnt[0][i - 1];
+        cnt[1][i] += cnt[1][i - 1];
+        cnt[2][i] += cnt[2][i - 1];
+    }
+
+    for(int _ = 0; _ < Q; _ ++) {
+        int a, b;
+        b--;
+        a--;
+        cin >> a >> b;
+        cout << cnt[0][b] - cnt[0][a - 1] <<" ";
+        cout << cnt[1][b] - cnt[1][a - 1] <<" ";
+        cout << cnt[2][b] - cnt[2][a - 1] <<endl;
+    }
+}

@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+
+}
+int main() {
+    cin.tie(0)->sync_with_stdio(0); // unsync C / C++ I/O streams
+//    freopen("maxcross.in","r",stdin);
+//    freopen("maxcross.out","w",stdout);
+    long long N;
+    cin >> N;
+    vector<long long> a(N + 2);
+    for(int i = 1; i <= N; i ++) {
+        cin >> a[i];
+    }
+    vector<long long> p(N + 2), s(N + 2);
+    for(int i = 1; i <= N; i ++) {
+        p[i] = __gcd(a[i], p[i - 1]);
+    }
+    for(int i = N; i >= 0; i--) {
+        s[i] = __gcd(a[i], s[i + 1]);
+    }
+    long long mx = 0;
+    for(int i = 1; i <= N; i++) {
+        mx = max(mx, __gcd(p[i - 1], s[i + 1]));
+    }
+    cout << mx << endl;
+}

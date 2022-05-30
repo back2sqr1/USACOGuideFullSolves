@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+    cin.tie(0)->sync_with_stdio(0); // unsync C / C++ I/O streams
+    freopen("div7.in","r",stdin);
+    freopen("div7.out","w",stdout);
+    long long N;
+    cin >> N;
+//   O(N ^ 2) all pairings and see if div7
+    vector<long long> v(N + 1);
+    for(int i = 1 ; i <= N; i++) {
+        cin >> v[i];
+    }
+    vector<long long> p(N + 1);
+    for(int i = 1 ; i <= N; i++) {
+        p[i] = p[i - 1] + v[i];
+    }
+    int longest = 0;
+    for(int i = 1; i <= N; i ++ ) {
+        for(int j = i + max(longest, 1); j <= N; j++) {
+            long long sum = p[j] - p[i - 1];
+            if(sum % 7 == 0) {
+                longest = max(longest, j - i + 1);
+            }
+        }
+    }
+    cout << longest << endl;
+}

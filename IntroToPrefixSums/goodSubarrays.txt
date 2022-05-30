@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+    int N;
+    string s;
+    cin >> N >> s;
+    vector<long long> a(N);
+    for(int i = 0; i < N; i++ ) {
+        a[i] = s[i] - '0';
+    }
+    vector<long long> p(N + 1);
+    map<long long, long long> cnt;
+    for(int i = 1; i <= N; i++ ) {
+        p[i] = a[i - 1] + p[i - 1];
+    }
+    long long ans = 0;
+    for(int i = 0; i <= N; i++) {
+        cnt[p[i] - i] ++;
+    }
+    for(pair<long long, long long> a : cnt) {
+        long long n = a.second;
+        ans += n * (n - 1) / 2;
+    }
+    cout << ans << endl;
+}
+int main() {
+    cin.tie(0)->sync_with_stdio(0); // unsync C / C++ I/O streams
+//    freopen("maxcross.in","r",stdin);
+//    freopen("maxcross.out","w",stdout);
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
+}

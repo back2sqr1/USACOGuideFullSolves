@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+
+}
+int main() {
+    cin.tie(0)->sync_with_stdio(0); // unsync C / C++ I/O streams
+    string s;
+    cin >> s;
+    vector<long long> rem(2019);
+    long long run = 0;
+    rem[0] ++;
+    long long p = 10;
+    for(int i = s.size() - 1; i >= 0; i--) {
+        run += p * (s[i] - '0');
+        run %= 2019;
+        rem[run] ++;
+        p *= 10;
+        p %= 2019;
+    }
+    long long ans = 0;
+    for(int i = 0; i < 2019; i++) {
+        ans += rem[i] * (rem[i] - 1) / 2;
+        //nc2
+    }
+    cout << ans << endl;
+}

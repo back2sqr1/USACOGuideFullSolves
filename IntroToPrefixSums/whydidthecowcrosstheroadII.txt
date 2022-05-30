@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+    cin.tie(0)->sync_with_stdio(0); // unsync C / C++ I/O streams
+    freopen("maxcross.in","r",stdin);
+    freopen("maxcross.out","w",stdout);
+    int N, K, B;
+    cin >> N >> K >> B;
+    vector<int> p(N + 1);
+    for(int i = 0; i < B; i ++) {
+        int a;
+        cin >> a;
+        p[a] ++;
+    }
+    for(int i = 1; i <= N;  ++i) {
+        p[i] += p[i - 1];
+    }
+    int mn = 1e9;
+    for(int st = 1; st + K - 1<= N; st++) {
+        mn = min(mn, p[st + K - 1] - p[st - 1]);
+    }
+    cout << mn << endl;
+}
